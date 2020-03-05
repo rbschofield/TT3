@@ -1,0 +1,42 @@
+# Dungeon of the Snake!
+#
+# Location number:Text elements and Controls
+#
+# Control syntax:
+#   Embed Controls in text by enclosing in *..*, or put them at the end
+#   Controls are invoked in their numerical order of appearance (1 = execute 1st Control, 2 = execute 2nd...)
+#
+#   >x go to that room location
+#   !x found something (item, treasure, monster...)
+#   ^x parse trap
+#   @x try saving roll
+#
+#
+START:This is the dungeon entrance. Enter to the SE(1), or leave the dungeon(2).*>2*>17
+2:Entry room with narrow exits to the NE(1),*>3*or SW(2).*>17*  The main tunnel continues SE(3).*>5
+3:You are in an octagonal room with a small exit to the SW(1).*>2*  There is an urn in the center of the room that you can examine(2).*!1
+5:Trap!*^1
+17:You have survived the Dungeon of the Snake!*>EXIT
+EXIT:Goodbye...
+DEAD:You are dead.  Sorry.*>EXIT
+99:[Test Room]Go N(1),*>100*or examine the chest(2),*^99*or take the gem(3),*!99*or fight (rnd 3d6)*%3d6*Orcs!(4)*!100
+100:[Test Room #2]Print a message. Enter 1 to continue.*>99
+#
+#
+^99:[test] trap!
+#
+# Found Something: State (is it here now or not?) Available or Gone
+#   If Available, a (Y)es, (No) question will be asked
+#   A Yes answer, will set the state to Gone, then go to a location
+#   If No, will leave the State the same, and will then go to a location
+#
+# !n:State; Available text; Gone text; Avail+Yes Loc; Avail+No Loc; Gone Loc
+#
+!99:Available;This gemstone is worth 100gp. Do you take it?;There is an empty socket where a gemstone once rested;>99;>99;>99
+#
+!100:Available;Fight the Orcs.  Did you kill them?;The Orcs are lying dead in a pile.;>99;>DEAD;>99
+#
+# Saving Roll:
+# @n:Level to attempt; Attribute; location to go if success; location if failed
+#
+@99:2;Luck;>99;>DEAD
