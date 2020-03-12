@@ -20,10 +20,10 @@ class tcolor:
         bold = ""
         endc = ""
 
-print(tcolor.blue + "blue")
-print(tcolor.green + "green")
-print(tcolor.red + "red")
-print(tcolor.yellow + "yellow")
-print(tcolor.purple + "purple")
-print(tcolor.endc + "none")
-print(tcolor.bold + "bold")
+print tcolor.blue + "blue"
+print tcolor.green + "green"
+print tcolor.red + "red"
+print tcolor.yellow + "yellow"
+print tcolor.purple + "purple"
+print tcolor.endc + "none"
+print tcolor.bold + "bold"

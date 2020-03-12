@@ -37,7 +37,7 @@ def parserand(r_elem):
     total = 0
     for i in range(0,x):
         total += int(random.random()*y)+1
-    print(str(total)),
+    print((str(total)), end=' ')
     return total
 
 # Saving roll
@@ -49,7 +49,7 @@ def saveroll(level, attribute):
         r2 = d6()
         total = total+(r1+r2)
     roll = total + attribute
-    print(total, attribute, roll)
+    print((total, attribute, roll))
     if roll >= target:
         return True
     else:
@@ -68,12 +68,12 @@ def saveroll(level, attribute):
 def parse_found(FoundArray):
     found_element = FoundArray.split(";")
     if found_element[0] == "Available":
-        print(found_element[1])
+        print((found_element[1]))
         choice = "None"
         while choice == "None":
             print("(Y)es, or (N)o?")
-            choice = raw_input(">> ")
-            if choice.upper() <> "Y" and choice.upper() <> "N":
+            choice = input(">> ")
+            if choice.upper() != "Y" and choice.upper() != "N":
                 print("Invalid choice.")
                 choice = "None"
         if choice.upper() == "Y":
@@ -81,7 +81,7 @@ def parse_found(FoundArray):
         else: # Available, answered No
             return "NoChange", found_element[4]
     else:  # not Available
-        print(found_element[2] + "\n")
+        print((found_element[2] + "\n"))
         return "NoChange", found_element[5]
 
 
@@ -124,18 +124,18 @@ def dungeon(location):
         elif element[0] == "%":
             parserand(element.split("%")[1])
         else:
-            print(element),
+            print((element), end=' ')
     print("\r")
     choice = 0
     while choice == 0:
         print("Choose:")
-        print("1 - "+str(len(choicelist)))
+        print(("1 - "+str(len(choicelist))))
         try:
-            choice = int(raw_input(">> "))
+            choice = int(input(">> "))
             if choice < 1 or choice > len(choicelist):
                 raise Exception
-        except Exception, e:
-            print("Invalid choice: "+str(e))
+        except Exception as e:
+            print(("Invalid choice: "+str(e)))
             choice = 0
     location = parse_choice(choicelist[choice - 1])
     dungeon(location)

@@ -55,45 +55,45 @@ def char():
         MyCharacter.co = xd6(3)
         MyCharacter.ch = xd6(3)
         MyCharacter.gold = xd6(3)*10
-        print("Strength:     "+str(MyCharacter.st))
-        print("Dexterity:    "+str(MyCharacter.dx))
-        print("Intelligence: "+str(MyCharacter.iq))
-        print("Luck:         "+str(MyCharacter.lk))
-        print("Constitution: "+str(MyCharacter.co))
-        print("Charisma:     "+str(MyCharacter.ch))
-        print("Gold: "+str(MyCharacter.gold))
+        print(("Strength:     "+str(MyCharacter.st)))
+        print(("Dexterity:    "+str(MyCharacter.dx)))
+        print(("Intelligence: "+str(MyCharacter.iq)))
+        print(("Luck:         "+str(MyCharacter.lk)))
+        print(("Constitution: "+str(MyCharacter.co)))
+        print(("Charisma:     "+str(MyCharacter.ch)))
+        print(("Gold: "+str(MyCharacter.gold)))
         MyCharacter.adds = getadds(MyCharacter.st, MyCharacter.dx, MyCharacter.lk)
-        print("\nAdds: "+str(MyCharacter.adds))
-        keep = raw_input("Keep? (y)es/(n)o  >")
+        print(("\nAdds: "+str(MyCharacter.adds)))
+        keep = input("Keep? (y)es/(n)o  >")
 
-    name = raw_input ("Name Me >> ")
+    name = input ("Name Me >> ")
     MyCharacter.name = str(name)
-    words = raw_input ("Favorite Saying >> ")
+    words = input ("Favorite Saying >> ")
     MyCharacter.words = str(words)
-    weapon = raw_input ("My Weapon >> ")
+    weapon = input ("My Weapon >> ")
     MyCharacter.weapon = str(weapon)
     try:
-        MyCharacter.wdice = int(raw_input ("Weapon Dice >> "))
+        MyCharacter.wdice = int(input ("Weapon Dice >> "))
     except ValueError:
         print ("Need a number.  Using 0")
         MyCharacter.wdice = 0
     try:
-        MyCharacter.wadds = int(raw_input ("Weapon Adds >> "))
+        MyCharacter.wadds = int(input ("Weapon Adds >> "))
     except ValueError:
         print ("Need a number.  Using 0")
         MyCharacter.wadds = 0
-    armor = raw_input ("Armor >> ")
+    armor = input ("Armor >> ")
     MyCharacter.armor = str(armor)
     try:
-        MyCharacter.armortakes = int(raw_input ("Armor Absorbs >> "))
+        MyCharacter.armortakes = int(input ("Armor Absorbs >> "))
     except ValueError:
         print ("Need a number.  Using 0")
         MyCharacter.armortakes = 0
-    items = raw_input ("List Any Items >> ")
+    items = input ("List Any Items >> ")
     MyCharacter.items = str(items)
 
-    print("\n"+MyCharacter.name+" is Born!")
-    print(MyCharacter.words)
+    print(("\n"+MyCharacter.name+" is Born!"))
+    print((MyCharacter.words))
 
 #    print(Hero.saywords(MyCharacter))
 
@@ -101,7 +101,7 @@ def char():
 def showchar():
     attr_tuple = ("name","words","race","level","AP","gold","st","dx","iq","lk","co","ch","adds","weapon","wdice","wadds","armor","armortakes","items")
     for attr in attr_tuple:
-        print(attr + ": " + str(getattr(MyCharacter, attr)))
+        print((attr + ": " + str(getattr(MyCharacter, attr))))
 
 
 def saveme():
@@ -119,13 +119,13 @@ def loadme():
 
 def edit():
     for item in MyCharacter.__dict__:
-        print(item, MyCharacter.__dict__[item])
+        print((item, MyCharacter.__dict__[item]))
         try:
-            change = str(raw_input("Change? >>"))
+            change = str(input("Change? >>"))
         except:
             print("(y or n)")
         if change.lower() == "y":
-            newvalue = raw_input("New value? >>")
+            newvalue = input("New value? >>")
             try:
                 MyCharacter.__dict__[item] = newvalue
             except:
@@ -144,7 +144,7 @@ def edit():
 
     print("Recalculating adds")
     MyCharacter.adds = getadds(MyCharacter.st, MyCharacter.dx, MyCharacter.lk)
-    print("Adds: ") + str(MyCharacter.adds)
+    print(("Adds: ") + str(MyCharacter.adds))
 
 
 def race():
@@ -164,7 +164,7 @@ def race():
     print("x) Don't change - Exit.")
 
     try:
-        choice = str(raw_input ("Choice? >> "))
+        choice = str(input ("Choice? >> "))
     except ValueError:
         print ("Invalid choice.  Nothing changed.")
         return
@@ -197,20 +197,20 @@ def race():
 CharMenuDict = {"1":"char", "2":"showchar", "3":"edit", "4":"saveme", "5":"loadme", "6":"race", "m":"menu"}
 
 def charmenu():
-    print tcolor.green
+    print(tcolor.green)
     while True:
-        print
+        print()
         print ("1) Create Character")
         print ("2) Show Character")
         print ("3) Edit Character")
         print ("4) Save Character")
         print ("5) Load Character")
         print ("6) Assign Race (Dwarf, Elf, Hobbit)")
-        print
+        print()
         print ("m) Main Menu")
 
         try:
-            choice = str(raw_input ("Choice? >> "))
+            choice = str(input ("Choice? >> "))
         except ValueError:
             print ("Invalid choice")
 
@@ -221,8 +221,8 @@ def charmenu():
 
         try:
             eval(CharMenuDict[choice])()
-        except Exception, e:
-            print("Error - Char Menu: "+str(e))
+        except Exception as e:
+            print(("Error - Char Menu: "+str(e)))
 
 
 ##### Main Functions #####
@@ -243,9 +243,9 @@ def monster():
 def treasure():
     TreasureDict = {1:["Gem",15], 2:["Jewels",25], 3:["Gold",40], 4:["Amulet",75]}
     roll = d4()
-    print ("Treasure: " + TreasureDict[roll][0])
-    print ("Value: " + str(TreasureDict[roll][1]))
-    print ("\nYou get " + str(TreasureDict[roll][1]) + " Adventure Points!")
+    print(("Treasure: " + TreasureDict[roll][0]))
+    print(("Value: " + str(TreasureDict[roll][1])))
+    print(("\nYou get " + str(TreasureDict[roll][1]) + " Adventure Points!"))
     MyCharacter.AP = MyCharacter.AP + TreasureDict[roll][1]
 
 def dungeon():
@@ -255,37 +255,37 @@ def dungeon():
     parseline = dungeonarray[randelement].split("*")
     for piece in parseline:
         if piece == "10xd6":
-            print(10*d6()),
+            print((10*d6()), end=' ')
         elif piece == "1d4":
-            print(d4()),
+            print((d4()), end=' ')
         else:
-            print(piece),
+            print((piece), end=' ')
 
 def combat():
     global mr
     global MyCharacter
     currentcon = MyCharacter.co
     startmr = mr
-    print (MyCharacter.name + " with " + MyCharacter.weapon + "\n  vs")
-    print (Monster + ", MR: " + str(mr) + "\n--Fight!--")
+    print((MyCharacter.name + " with " + MyCharacter.weapon + "\n  vs"))
+    print((Monster + ", MR: " + str(mr) + "\n--Fight!--"))
     while mr > 0:
         MyRoll = xd6(MyCharacter.wdice) + MyCharacter.wadds + MyCharacter.adds
         MRroll = xd6(int(mr/10)+1) + (int(mr/2))
-        print (MyCharacter.name + ": "+str(MyRoll))
-        print (Monster + ": "+str(MRroll))
+        print((MyCharacter.name + ": "+str(MyRoll)))
+        print((Monster + ": "+str(MRroll)))
         if MyRoll >= MRroll:
             mr = mr - (MyRoll - MRroll)
-            print (Monster + " now: "+str(mr) + "\n----------")
+            print((Monster + " now: "+str(mr) + "\n----------"))
         else:
             currentcon = currentcon - max((MRroll - MyRoll) - MyCharacter.armortakes, 0)
-            print (MyCharacter.name+" Constitution: "+str(currentcon) + "\n----------")
+            print((MyCharacter.name+" Constitution: "+str(currentcon) + "\n----------"))
             if currentcon <= 0:
                 print("You died!")
                 break
     if currentcon > 0:
-        print (MyCharacter.name + " Constitution: "+str(currentcon))
-        print (Monster + " died!")
-        print ("\nYou get " + str(startmr) + " Adventure Points!")
+        print((MyCharacter.name + " Constitution: "+str(currentcon)))
+        print((Monster + " died!"))
+        print(("\nYou get " + str(startmr) + " Adventure Points!"))
         MyCharacter.AP = MyCharacter.AP + startmr
 
 
@@ -293,7 +293,7 @@ def test():
     print ("\nTest Function:")
 
     for item in vars(MyCharacter):
-        print(item, getattr(MyCharacter, item))
+        print((item, getattr(MyCharacter, item)))
 
 #    for item in MyCharacter.__dict__:
 #        print(item,":",MyCharacter.__dict__[item])
@@ -304,19 +304,19 @@ def test():
 MenuDict = {"1":"charmenu", "2":"monster", "3":"dungeon", "4":"treasure", "5":"combat", "9":"test", "x":"done"}
 
 def Menu():
-    print tcolor.purple
-    print
+    print(tcolor.purple)
+    print()
     print ("1) Character Menu")
-    print
+    print()
     print ("2) Random Monster")
     print ("3) Dungeon Element")
     print ("4) Random Treasure")
     print ("5) Combat! [current Character vs Monster]")
-    print
+    print()
     print ("9-test")
     print ("x) EXIT")
 
-    choice = raw_input ("Choice?  >> ")
+    choice = input ("Choice?  >> ")
     return str(choice)
 
 ##### Main #####
@@ -328,8 +328,8 @@ def Main():
             break
         try:
             eval(MenuDict[choice])()
-        except Exception, e:
-            print "Error - Main: "+str(e)
+        except Exception as e:
+            print("Error - Main: "+str(e))
 
 if __name__ == "__main__":
     Main()

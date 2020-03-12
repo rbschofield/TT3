@@ -29,7 +29,7 @@ def parse_xdy(r_elem):
     total = 0
     for i in range(0,x):
         total += int(random.random()*y)+1
-    print((str(total)), end=' ')
+    print(str(total)),
     return total
 
 # Saving roll
@@ -41,7 +41,7 @@ def saveroll(level, attribute):
         r2 = d6()
         total = total+(r1+r2)
     roll = total + attribute
-    print((total, attribute, roll))
+    print(total, attribute, roll)
     if roll >= target:
         return True
     else:
@@ -63,12 +63,12 @@ def saveroll(level, attribute):
 def parse_event(EventArray):
     event_element = EventArray.split(";")
     if event_element[0] == "T":
-        print((event_element[1]))  ### need to add random parser
+        print(event_element[1])  ### need to add random parser
         choice = "None"
         while choice == "None":
             print("(Y)es, or (N)o?")
-            choice = input(">> ")
-            if choice.upper() != "Y" and choice.upper() != "N":
+            choice = raw_input(">> ")
+            if choice.upper() <> "Y" and choice.upper() <> "N":
                 print("Invalid choice.")
                 choice = "None"
         if choice.upper() == "Y":
@@ -76,7 +76,7 @@ def parse_event(EventArray):
         else: # Event True, answered No
             return "NoChange", event_element[3]
     else:  # Event False
-        print((event_element[4] + "\n"))  ### need to add random parser
+        print(event_element[4] + "\n")  ### need to add random parser
         return "NoChange", found_element[5]
 
 
@@ -117,18 +117,18 @@ def adventure(location):
 ###        elif element[0] == "%":
 ###            parserand(element.split("%")[1])
         else:
-            print((element), end=' ')
+            print(element),
     print("\r")
     choice = 0
     while choice == 0:
         print("Choose:")
-        print(("1 - "+str(len(choicelist))))
+        print("1 - "+str(len(choicelist)))
         try:
-            choice = int(input(">> "))
+            choice = int(raw_input(">> "))
             if choice < 1 or choice > len(choicelist):
                 raise Exception
-        except Exception as e:
-            print(("Invalid choice: "+str(e)))
+        except Exception, e:
+            print("Invalid choice: "+str(e))
             choice = 0
     location = parse_choice(choicelist[choice - 1])
     adventure(location)

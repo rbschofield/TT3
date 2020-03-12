@@ -23,7 +23,7 @@ class Hero:
         self.items = "none"
 
     def saywords(self):
-        print(self.name, "says: ",self.words)
+        print((self.name, "says: ",self.words))
 
     def makedwarf(self, st, co, ch):
         self.st = st * 2
