@@ -1,2 +1,2 @@
 # TT3
-Tunnels and Trolls text based adventures using Python3
+Tunnels and Trolls text based adventuring using Python3
