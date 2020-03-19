@@ -1,6 +1,7 @@
 __author__ = 'Robert Schofield'
 
 import random, pickle
+from GameDice import *
 from TTChars import *
 
 ##### Initialization #####
@@ -23,17 +24,17 @@ file.close()
 
 # Dice defs:
 
-def d4():
-    return int(random.random()*4)+1
+#def d4():
+#    return int(random.random()*4)+1
 
-def d6():
-    return int(random.random()*6)+1
+#def d6():
+#    return int(random.random()*6)+1
 
-def xd6(x):
-    total = 0
-    for i in range(0,x):
-        total += d6()
-    return total
+#def xd6(x):
+#    total = 0
+#    for i in range(0,x):
+#        total += d6()
+#    return total
 
 ##### Initialization Complete #####
 ##### Character Functions #####
