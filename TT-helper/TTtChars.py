@@ -1,42 +1,7 @@
 __author__ = 'Robert Schofield'
 
-import random, pickle
-from GameDice import *
-from TTChars import *
+import GameDice
 
-##### Initialization #####
-# Initialize character:
-
-global MyCharacter
-MyCharacter = Hero(12,12,12,12,12,12)
-
-# Load dungeon elements:
-
-global dungeonarray
-dungeonarray = []
-file = open( "TTDungeon.txt", "r" )
-for line in file:
-    if line.startswith("#"):
-        pass
-    else:
-        dungeonarray.append(line)
-file.close()
-
-# Dice defs:
-
-#def d4():
-#    return int(random.random()*4)+1
-
-#def d6():
-#    return int(random.random()*6)+1
-
-#def xd6(x):
-#    total = 0
-#    for i in range(0,x):
-#        total += d6()
-#    return total
-
-##### Initialization Complete #####
 ##### Character Functions #####
 
 def getadds(st, dx, lk):
@@ -188,146 +153,128 @@ def race():
     finally:
         MyCharacter.adds = getadds(MyCharacter.st, MyCharacter.dx, MyCharacter.lk)
 
-#        (newst, newco, newch) = Hero.makedwarf(MyCharacter, MyCharacter.st, MyCharacter.co, MyCharacter.ch)
-
 
 ##### End Character Functions #####
-##### Character Menu #####
+##### Begin Race Conbversions #####
 
-CharMenuDict = {"1":"char", "2":"showchar", "3":"edit", "4":"saveme", "5":"loadme", "6":"race", "m":"menu"}
+class Hero:
+    def __init__(self,st,dx,iq,lk,co,ch):
+        self.name = "Hero"
+        self.words = "I'm a nobody"
+        self.race = "Human"
+        self.level = 1
+        self.AP = 0
+        self.gold = 0
+        self.st = st
+        self.dx = dx
+        self.iq = iq
+        self.lk = lk
+        self.co = co
+        self.ch = ch
+        self.adds = 0
+        self.weapon = "none"
+        self.wdice = 0
+        self.wadds = 0
+        self.armor = "none"
+        self.armortakes = 0
+        self.items = "none"
 
-def charmenu():
-    while True:
-        print()
-        print ("1) Create Character")
-        print ("2) Show Character")
-        print ("3) Edit Character")
-        print ("4) Save Character")
-        print ("5) Load Character")
-        print ("6) Assign Race (Dwarf, Elf, Hobbit)")
-        print()
-        print ("m) Main Menu")
+    def saywords(self):
+        print((self.name, "says: ",self.words))
 
-        try:
-            choice = str(input ("Choice? >> "))
-        except ValueError:
-            print ("Invalid choice")
+    def makedwarf(self, st, co, ch):
+        self.st = st * 2
+        self.co = co * 2
+        self.ch = (ch * 2) / 3
+        return self.st, self.co, self.ch
 
-        if choice.lower() == "m":
-            break
+    def makeelf(self, dx, iq, co, ch):
+        self.st = (dx * 3) / 2
+        self.iq = (iq * 3) / 2
+        self.co = (co * 2) / 3
+        self.ch = ch * 2
+        return self.dx, self.iq, self.co, self.ch
 
-##        print(CharMenuDict[choice])
-
-        try:
-            eval(CharMenuDict[choice])()
-        except Exception as e:
-            print(("Error - Char Menu: "+str(e)))
-
-
-##### Main Functions #####
-
-def monster():
-    global Monster
-    global mr
-
-    MonsterList = [["Orc",10], ["Skeleton",15], ["Goblin",20], ["Ghoul",28], ["Ogre",29], ["Vampire",30], ["Flame Demon",35], ["Dragon",50]]
-    roll = int(random.random()*len(MonsterList))
-
-    Monster = MonsterList[roll][0]
-    mr = MonsterList[roll][1]
-
-    print(Monster)
-    print(mr)
-
-def treasure():
-    TreasureDict = {1:["Gem",15], 2:["Jewels",25], 3:["Gold",40], 4:["Amulet",75]}
-    roll = d4()
-    print(("Treasure: " + TreasureDict[roll][0]))
-    print(("Value: " + str(TreasureDict[roll][1])))
-    print(("\nYou get " + str(TreasureDict[roll][1]) + " Adventure Points!"))
-    MyCharacter.AP = MyCharacter.AP + TreasureDict[roll][1]
-
-def dungeon():
-#    print dungeonarray
-    randelement = int(random.random()*len(dungeonarray))
-#    print dungeonarray[randelement]
-    parseline = dungeonarray[randelement].split("*")
-    for piece in parseline:
-        if piece == "10xd6":
-            print((10*d6()), end=' ')
-        elif piece == "1d4":
-            print((d4()), end=' ')
-        else:
-            print((piece), end=' ')
-
-def combat():
-    global mr
-    global MyCharacter
-    currentcon = MyCharacter.co
-    startmr = mr
-    print((MyCharacter.name + " with " + MyCharacter.weapon + "\n  vs"))
-    print((Monster + ", MR: " + str(mr) + "\n--Fight!--"))
-    while mr > 0:
-        MyRoll = xd6(MyCharacter.wdice) + MyCharacter.wadds + MyCharacter.adds
-        MRroll = xd6(int(mr/10)+1) + (int(mr/2))
-        print((MyCharacter.name + ": "+str(MyRoll)))
-        print((Monster + ": "+str(MRroll)))
-        if MyRoll >= MRroll:
-            mr = mr - (MyRoll - MRroll)
-            print((Monster + " now: "+str(mr) + "\n----------"))
-        else:
-            currentcon = currentcon - max((MRroll - MyRoll) - MyCharacter.armortakes, 0)
-            print((MyCharacter.name+" Constitution: "+str(currentcon) + "\n----------"))
-            if currentcon <= 0:
-                print("You died!")
-                break
-    if currentcon > 0:
-        print((MyCharacter.name + " Constitution: "+str(currentcon)))
-        print((Monster + " died!"))
-        print(("\nYou get " + str(startmr) + " Adventure Points!"))
-        MyCharacter.AP = MyCharacter.AP + startmr
+    def makehobbit(self, st, dx, co):
+        self.st = st / 2
+        self.dx = (dx *3) / 2
+        self.co = co * 2
+        return self.st, self.dx, self.co
 
 
-def test():
-    print ("\nTest Function:")
+class Dwarf(Hero):
+    def __init__(self, Hero):
+        self.name = Hero.name
+        self.words = Hero.words
+        self.race = "Dwarf"
+        self.level = Hero.level
+        self.AP = Hero.AP
+        self.gold = Hero.gold
+        self.st = Hero.st * 2
+        self.dx = Hero.dx
+        self.iq = Hero.iq
+        self.lk = Hero.lk
+        self.co = Hero.co * 2
+        self.ch = (Hero.ch * 2) / 3
+        self.adds = Hero.adds
+        self.weapon = Hero.weapon
+        self.wdice = Hero.wdice
+        self.wadds = Hero.wadds
+        self.armor = Hero.armor
+        self.armortakes = Hero.armortakes
+        self.items = Hero.items
 
-    for item in vars(MyCharacter):
-        print((item, getattr(MyCharacter, item)))
+    def dwarfsays(self):
+        print("I'm a Dwarf!")
 
-#    for item in MyCharacter.__dict__:
-#        print(item,":",MyCharacter.__dict__[item])
 
-##### End Main Functions #####
-##### Main Menu #####
+class Elf(Hero):
+    def __init__(self, Hero):
+        self.name = Hero.name
+        self.words = Hero.words
+        self.race = "Elf"
+        self.level = Hero.level
+        self.AP = Hero.AP
+        self.gold = Hero.gold
+        self.st = Hero.st
+        self.dx = (Hero.dx * 3) /2
+        self.iq = (Hero.iq * 3) / 2
+        self.lk = Hero.lk
+        self.co = (Hero.co * 2) / 3
+        self.ch = Hero.ch * 2
+        self.adds = Hero.adds
+        self.weapon = Hero.weapon
+        self.wdice = Hero.wdice
+        self.wadds = Hero.wadds
+        self.armor = Hero.armor
+        self.armortakes = Hero.armortakes
+        self.items = Hero.items
 
-MenuDict = {"1":"charmenu", "2":"monster", "3":"dungeon", "4":"treasure", "5":"combat", "9":"test", "x":"done"}
+    def elfsays(self):
+        print("I like the woods")
 
-def Menu():
-    print()
-    print ("1) Character Menu")
-    print()
-    print ("2) Random Monster")
-    print ("3) Dungeon Element")
-    print ("4) Random Treasure")
-    print ("5) Combat! [current Character vs Monster]")
-    print()
-    print ("9-test")
-    print ("x) EXIT")
 
-    choice = input ("Choice?  >> ")
-    return str(choice)
+class Hobbit(Hero):
+    def __init__(self, Hero):
+        self.name = Hero.name
+        self.words = Hero.words
+        self.race = "Hobbit"
+        self.level = Hero.level
+        self.AP = Hero.AP
+        self.gold = Hero.gold
+        self.st = Hero.st / 2
+        self.dx = (Hero.dx * 3) / 2
+        self.iq = Hero.iq
+        self.lk = Hero.lk
+        self.co = Hero.co * 2
+        self.ch = Hero.ch
+        self.adds = Hero.adds
+        self.weapon = Hero.weapon
+        self.wdice = Hero.wdice
+        self.wadds = Hero.wadds
+        self.armor = Hero.armor
+        self.armortakes = Hero.armortakes
+        self.items = Hero.items
 
-##### Main #####
-
-def Main():
-    while True:
-        choice = Menu()
-        if choice.lower() == "x":
-            break
-        try:
-            eval(MenuDict[choice])()
-        except Exception as e:
-            print("Error - Main: "+str(e))
-
-if __name__ == "__main__":
-    Main()
+    def hobbitsays(self):
+        print("How's the weather up there!")
