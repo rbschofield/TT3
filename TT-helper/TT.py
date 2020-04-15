@@ -1,6 +1,6 @@
 __author__ = 'Robert Schofield'
 
-import random, pickle
+import random, pickle, print_slow
 from GameDice import *
 from TTChars import *
 
@@ -289,7 +289,7 @@ def combat():
 
 
 def test():
-    print ("\nTest Function:")
+    print_slow ("\nTest Function:")
 
     for item in vars(MyCharacter):
         print((item, getattr(MyCharacter, item)))

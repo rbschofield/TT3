@@ -1,7 +1,8 @@
 from GameDice import *
+from print_slow import *
 
 d4roll = d4()
-print("1d4: " + str(d4roll))
+print_slow("1d4: " + str(d4roll))
 
 print("1d6: " + str(d6()))
 
