@@ -15,11 +15,12 @@ def xd6(x):
 # parse roll(xdy)
 # i.e. roll(3d6), roll(4d10)
 #
-def roll(r_elem):
+def roll(r_elem = "2d6"):
     x = int(r_elem.split("d")[0])
     y = int(r_elem.split("d")[1])
     total = 0
     for i in range(0,x):
         total += int(random.random()*y)+1
 #    print((str(total)), end=' ')
+    print(r_elem)
     return total
