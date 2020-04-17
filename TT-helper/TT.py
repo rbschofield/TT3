@@ -1,8 +1,9 @@
 __author__ = 'Robert Schofield'
 
-import random, pickle, print_slow
+import random, pickle
 from GameDice import *
 from TTChars import *
+from print_slow import *
 
 ##### Initialization #####
 # Initialize character:
@@ -37,6 +38,14 @@ file.close()
 #    return total
 
 ##### Initialization Complete #####
+banner = open("banner.ascii","r")
+
+for line in banner:
+    print(line, end='')
+banner.close()
+print()
+print_slow("Game Master Helper, or Solo Play................. GO!")
+
 ##### Character Functions #####
 
 def getadds(st, dx, lk):

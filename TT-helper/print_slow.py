@@ -6,4 +6,4 @@ def print_slow(txt):
         sleep(0.1)
     print() # go to new line
 
-print_slow("Slow print function")
+# print_slow("Slow print function")
