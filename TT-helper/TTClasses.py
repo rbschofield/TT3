@@ -105,7 +105,7 @@ class Hobbit(Hero):
         self.level = Hero.level
         self.AP = Hero.AP
         self.gold = Hero.gold
-        self.st = Hero.st / 2
+        self.st = int(round(Hero.st / 2))
         self.dx = int(round((Hero.dx * 3) / 2))
         self.iq = Hero.iq
         self.lk = Hero.lk

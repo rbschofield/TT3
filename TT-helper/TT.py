@@ -1,6 +1,7 @@
 __author__ = 'Robert Schofield'
 
-import random, pickle
+#import random, pickle
+import random
 from GameDice import *
 from TTClasses import *
 from TTChars import *
@@ -102,10 +103,15 @@ def showchar():
 
 
 def saveme():
-    file = open("MyTT-Character", "wb")
-    pickle.dump(MyCharacter, file)
-    file.close()
+    savechar(MyCharacter)
+    
+#def saveme():
+#    file = open("MyTT-Character", "wb")
+#    pickle.dump(MyCharacter, file)
+#    file.close()
 
+#def loadme():
+#    loadchar()
 
 def loadme():
     global MyCharacter

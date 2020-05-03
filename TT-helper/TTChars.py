@@ -1,5 +1,6 @@
-__author__ = 'Robert Schofield'
+h_author__ = 'Robert Schofield'
 
+import pickle
 from GameDice import *
 
 ### Character Functions ###`
@@ -10,3 +11,16 @@ def getadds(st, dx, lk):
     adds = plusadds - negadds
     return adds
 
+def savechar(Character):
+    file = open("MyTT-Character", "wb")
+    pickle.dump(Character, file)
+    file.close()
+
+
+#def loadchar():
+#    global MyCharacter
+#    file = open("MyTT-Character", "rb")
+#    print(pickle.load(file))
+#    MyCharacter = pickle.load(file)
+#    print(MyCharacter)
+#    file.close()
