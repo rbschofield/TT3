@@ -2,6 +2,7 @@ __author__ = 'Robert Schofield'
 
 import random, pickle
 from GameDice import *
+from TTClasses import *
 from TTChars import *
 from print_slow import *
 
@@ -23,20 +24,6 @@ for line in file:
         dungeonarray.append(line)
 file.close()
 
-# Dice defs:
-
-#def d4():
-#    return int(random.random()*4)+1
-
-#def d6():
-#    return int(random.random()*6)+1
-
-#def xd6(x):
-#    total = 0
-#    for i in range(0,x):
-#        total += d6()
-#    return total
-
 ##### Initialization Complete #####
 banner = open("banner.ascii","r")
 
@@ -48,13 +35,14 @@ print_slow("Game Master Helper, or Solo Play................. GO!")
 
 ##### Character Functions #####
 
-def getadds(st, dx, lk):
-    plusadds = (max(st-12,0)+max(dx-12,0)+max(lk-12,0))
-    negadds = (max(9-st,0)+max(9-dx,0)+max(9-lk,0))
-    adds = plusadds - negadds
-    return adds
+#def getadds(st, dx, lk):
+#    plusadds = (max(st-12,0)+max(dx-12,0)+max(lk-12,0))
+#    negadds = (max(9-st,0)+max(9-dx,0)+max(9-lk,0))
+#    adds = plusadds - negadds
+#    return adds
 
 def char():
+    MyCharacter.race = "Human"
     keep = "n"
     while keep != "y":
         MyCharacter.st = xd6(3)
@@ -104,7 +92,7 @@ def char():
     print(("\n"+MyCharacter.name+" is Born!"))
     print((MyCharacter.words))
 
-#    print(Hero.saywords(MyCharacter))
+    print(Hero.saywords(MyCharacter))
 
 
 def showchar():
@@ -140,7 +128,7 @@ def edit():
             except:
                 print("Bad value.  Not changed.")
                 pass
-#### fix integers
+#### strings to integers
     MyCharacter.st = int(MyCharacter.st)
     MyCharacter.dx = int(MyCharacter.dx)
     MyCharacter.iq = int(MyCharacter.iq)
