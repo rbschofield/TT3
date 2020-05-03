@@ -16,11 +16,16 @@ def savechar(Character):
     pickle.dump(Character, file)
     file.close()
 
+def show(Character):
+    attr_tuple = ("name","words","race","level","AP","gold","st","dx","iq","lk","co","ch","adds","weapon","wdice","wadds","armor","armortakes","items")
+    for attr in attr_tuple:
+        print((attr + ": " + str(getattr(Character, attr))))
+
 
 #def loadchar():
 #    global MyCharacter
 #    file = open("MyTT-Character", "rb")
 #    print(pickle.load(file))
-#    MyCharacter = pickle.load(file)
+#    return pickle.load(file)
 #    print(MyCharacter)
 #    file.close()

@@ -36,11 +36,6 @@ print_slow("Game Master Helper, or Solo Play................. GO!")
 
 ##### Character Functions #####
 
-#def getadds(st, dx, lk):
-#    plusadds = (max(st-12,0)+max(dx-12,0)+max(lk-12,0))
-#    negadds = (max(9-st,0)+max(9-dx,0)+max(9-lk,0))
-#    adds = plusadds - negadds
-#    return adds
 
 def char():
     MyCharacter.race = "Human"
@@ -89,6 +84,7 @@ def char():
         MyCharacter.armortakes = 0
     items = input ("List Any Items >> ")
     MyCharacter.items = str(items)
+    MyCharacter.AP = 0
 
     print(("\n"+MyCharacter.name+" is Born!"))
     print((MyCharacter.words))
@@ -97,21 +93,13 @@ def char():
 
 
 def showchar():
-    attr_tuple = ("name","words","race","level","AP","gold","st","dx","iq","lk","co","ch","adds","weapon","wdice","wadds","armor","armortakes","items")
-    for attr in attr_tuple:
-        print((attr + ": " + str(getattr(MyCharacter, attr))))
-
+    show(MyCharacter)
 
 def saveme():
     savechar(MyCharacter)
     
-#def saveme():
-#    file = open("MyTT-Character", "wb")
-#    pickle.dump(MyCharacter, file)
-#    file.close()
-
 #def loadme():
-#    loadchar()
+#    MyCharacter = loadchar()
 
 def loadme():
     global MyCharacter
@@ -121,12 +109,10 @@ def loadme():
 
 
 def edit():
+    global MyCharacter
     for item in MyCharacter.__dict__:
         print((item, MyCharacter.__dict__[item]))
-        try:
-            change = str(input("Change? >>"))
-        except:
-            print("(y or n)")
+        change = str(input('Change? ("y" to change) >>'))
         if change.lower() == "y":
             newvalue = input("New value? >>")
             try:
@@ -141,6 +127,7 @@ def edit():
     MyCharacter.lk = int(MyCharacter.lk)
     MyCharacter.co = int(MyCharacter.co)
     MyCharacter.ch = int(MyCharacter.ch)
+    MyCharacter.AP = int(MyCharacter.AP)
     MyCharacter.wdice = int(MyCharacter.wdice)
     MyCharacter.wadds = int(MyCharacter.wadds)
     MyCharacter.armortakes = int(MyCharacter.armortakes)
