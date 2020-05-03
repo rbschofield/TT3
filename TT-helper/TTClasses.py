@@ -25,24 +25,24 @@ class Hero:
     def saywords(self):
         print((self.name, "says: ",self.words))
 
-    def makedwarf(self, st, co, ch):
-        self.st = st * 2
-        self.co = co * 2
-        self.ch = (ch * 2) / 3
-        return self.st, self.co, self.ch
+#    def makedwarf(self, st, co, ch):
+#        self.st = st * 2
+#        self.co = co * 2
+#        self.ch = int(round((ch * 2) / 3))
+#        return self.st, self.co, self.ch
 
-    def makeelf(self, dx, iq, co, ch):
-        self.st = (dx * 3) / 2
-        self.iq = (iq * 3) / 2
-        self.co = (co * 2) / 3
-        self.ch = ch * 2
-        return self.dx, self.iq, self.co, self.ch
+#    def makeelf(self, dx, iq, co, ch):
+#        self.st = (dx * 3) / 2
+#        self.iq = (iq * 3) / 2
+#        self.co = (co * 2) / 3
+#        self.ch = ch * 2
+#        return self.dx, self.iq, self.co, self.ch
 
-    def makehobbit(self, st, dx, co):
-        self.st = st / 2
-        self.dx = (dx *3) / 2
-        self.co = co * 2
-        return self.st, self.dx, self.co
+#    def makehobbit(self, st, dx, co):
+#        self.st = st / 2
+#        self.dx = (dx *3) / 2
+#        self.co = co * 2
+#        return self.st, self.dx, self.co
 
 
 class Dwarf(Hero):
@@ -58,7 +58,7 @@ class Dwarf(Hero):
         self.iq = Hero.iq
         self.lk = Hero.lk
         self.co = Hero.co * 2
-        self.ch = (Hero.ch * 2) / 3
+        self.ch = int(round((Hero.ch * 2) / 3))
         self.adds = Hero.adds
         self.weapon = Hero.weapon
         self.wdice = Hero.wdice
@@ -80,10 +80,10 @@ class Elf(Hero):
         self.AP = Hero.AP
         self.gold = Hero.gold
         self.st = Hero.st
-        self.dx = (Hero.dx * 3) /2
-        self.iq = (Hero.iq * 3) / 2
+        self.dx = int(round((Hero.dx * 3) / 2))
+        self.iq = int(round((Hero.iq * 3) / 2))
         self.lk = Hero.lk
-        self.co = (Hero.co * 2) / 3
+        self.co = int(round((Hero.co * 2) / 3))
         self.ch = Hero.ch * 2
         self.adds = Hero.adds
         self.weapon = Hero.weapon
@@ -105,8 +105,8 @@ class Hobbit(Hero):
         self.level = Hero.level
         self.AP = Hero.AP
         self.gold = Hero.gold
-        self.st = Hero.st / 2
-        self.dx = (Hero.dx * 3) / 2
+        self.st = int(round(Hero.st / 2))
+        self.dx = int(round((Hero.dx * 3) / 2))
         self.iq = Hero.iq
         self.lk = Hero.lk
         self.co = Hero.co * 2
@@ -121,3 +121,7 @@ class Hobbit(Hero):
 
     def hobbitsays(self):
         print("How's the weather up there!")
+
+
+#MyCharacter = Hero(12,12,12,12,12,12)
+#print(MyCharacter)

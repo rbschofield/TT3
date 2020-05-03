@@ -1,123 +1,31 @@
-__author__ = 'Robert Schofield'
+h_author__ = 'Robert Schofield'
 
-class Hero:
-    def __init__(self,st,dx,iq,lk,co,ch):
-        self.name = "Hero"
-        self.words = "I'm a nobody"
-        self.race = "Human"
-        self.level = 1
-        self.AP = 0
-        self.gold = 0
-        self.st = st
-        self.dx = dx
-        self.iq = iq
-        self.lk = lk
-        self.co = co
-        self.ch = ch
-        self.adds = 0
-        self.weapon = "none"
-        self.wdice = 0
-        self.wadds = 0
-        self.armor = "none"
-        self.armortakes = 0
-        self.items = "none"
+import pickle
+from GameDice import *
 
-    def saywords(self):
-        print((self.name, "says: ",self.words))
+### Character Functions ###`
 
-    def makedwarf(self, st, co, ch):
-        self.st = st * 2
-        self.co = co * 2
-        self.ch = (ch * 2) / 3
-        return self.st, self.co, self.ch
+def getadds(st, dx, lk):
+    plusadds = (max(st-12,0)+max(dx-12,0)+max(lk-12,0))
+    negadds = (max(9-st,0)+max(9-dx,0)+max(9-lk,0))
+    adds = plusadds - negadds
+    return adds
 
-    def makeelf(self, dx, iq, co, ch):
-        self.st = (dx * 3) / 2
-        self.iq = (iq * 3) / 2
-        self.co = (co * 2) / 3
-        self.ch = ch * 2
-        return self.dx, self.iq, self.co, self.ch
+def savechar(Character):
+    file = open("MyTT-Character", "wb")
+    pickle.dump(Character, file)
+    file.close()
 
-    def makehobbit(self, st, dx, co):
-        self.st = st / 2
-        self.dx = (dx *3) / 2
-        self.co = co * 2
-        return self.st, self.dx, self.co
+def show(Character):
+    attr_tuple = ("name","words","race","level","AP","gold","st","dx","iq","lk","co","ch","adds","weapon","wdice","wadds","armor","armortakes","items")
+    for attr in attr_tuple:
+        print((attr + ": " + str(getattr(Character, attr))))
 
 
-class Dwarf(Hero):
-    def __init__(self, Hero):
-        self.name = Hero.name
-        self.words = Hero.words
-        self.race = "Dwarf"
-        self.level = Hero.level
-        self.AP = Hero.AP
-        self.gold = Hero.gold
-        self.st = Hero.st * 2
-        self.dx = Hero.dx
-        self.iq = Hero.iq
-        self.lk = Hero.lk
-        self.co = Hero.co * 2
-        self.ch = (Hero.ch * 2) / 3
-        self.adds = Hero.adds
-        self.weapon = Hero.weapon
-        self.wdice = Hero.wdice
-        self.wadds = Hero.wadds
-        self.armor = Hero.armor
-        self.armortakes = Hero.armortakes
-        self.items = Hero.items
-
-    def dwarfsays(self):
-        print("I'm a Dwarf!")
-
-
-class Elf(Hero):
-    def __init__(self, Hero):
-        self.name = Hero.name
-        self.words = Hero.words
-        self.race = "Elf"
-        self.level = Hero.level
-        self.AP = Hero.AP
-        self.gold = Hero.gold
-        self.st = Hero.st
-        self.dx = (Hero.dx * 3) /2
-        self.iq = (Hero.iq * 3) / 2
-        self.lk = Hero.lk
-        self.co = (Hero.co * 2) / 3
-        self.ch = Hero.ch * 2
-        self.adds = Hero.adds
-        self.weapon = Hero.weapon
-        self.wdice = Hero.wdice
-        self.wadds = Hero.wadds
-        self.armor = Hero.armor
-        self.armortakes = Hero.armortakes
-        self.items = Hero.items
-
-    def elfsays(self):
-        print("I like the woods")
-
-
-class Hobbit(Hero):
-    def __init__(self, Hero):
-        self.name = Hero.name
-        self.words = Hero.words
-        self.race = "Hobbit"
-        self.level = Hero.level
-        self.AP = Hero.AP
-        self.gold = Hero.gold
-        self.st = Hero.st / 2
-        self.dx = (Hero.dx * 3) / 2
-        self.iq = Hero.iq
-        self.lk = Hero.lk
-        self.co = Hero.co * 2
-        self.ch = Hero.ch
-        self.adds = Hero.adds
-        self.weapon = Hero.weapon
-        self.wdice = Hero.wdice
-        self.wadds = Hero.wadds
-        self.armor = Hero.armor
-        self.armortakes = Hero.armortakes
-        self.items = Hero.items
-
-    def hobbitsays(self):
-        print("How's the weather up there!")
+#def loadchar():
+#    global MyCharacter
+#    file = open("MyTT-Character", "rb")
+#    print(pickle.load(file))
+#    return pickle.load(file)
+#    print(MyCharacter)
+#    file.close()

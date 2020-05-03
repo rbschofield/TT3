@@ -1,7 +1,9 @@
 __author__ = 'Robert Schofield'
 
-import random, pickle
+#import random, pickle
+import random
 from GameDice import *
+from TTClasses import *
 from TTChars import *
 from print_slow import *
 
@@ -23,20 +25,6 @@ for line in file:
         dungeonarray.append(line)
 file.close()
 
-# Dice defs:
-
-#def d4():
-#    return int(random.random()*4)+1
-
-#def d6():
-#    return int(random.random()*6)+1
-
-#def xd6(x):
-#    total = 0
-#    for i in range(0,x):
-#        total += d6()
-#    return total
-
 ##### Initialization Complete #####
 banner = open("banner.ascii","r")
 
@@ -48,13 +36,9 @@ print_slow("Game Master Helper, or Solo Play................. GO!")
 
 ##### Character Functions #####
 
-def getadds(st, dx, lk):
-    plusadds = (max(st-12,0)+max(dx-12,0)+max(lk-12,0))
-    negadds = (max(9-st,0)+max(9-dx,0)+max(9-lk,0))
-    adds = plusadds - negadds
-    return adds
 
 def char():
+    MyCharacter.race = "Human"
     keep = "n"
     while keep != "y":
         MyCharacter.st = xd6(3)
@@ -100,24 +84,22 @@ def char():
         MyCharacter.armortakes = 0
     items = input ("List Any Items >> ")
     MyCharacter.items = str(items)
+    MyCharacter.AP = 0
 
     print(("\n"+MyCharacter.name+" is Born!"))
     print((MyCharacter.words))
 
-#    print(Hero.saywords(MyCharacter))
+    print(Hero.saywords(MyCharacter))
 
 
 def showchar():
-    attr_tuple = ("name","words","race","level","AP","gold","st","dx","iq","lk","co","ch","adds","weapon","wdice","wadds","armor","armortakes","items")
-    for attr in attr_tuple:
-        print((attr + ": " + str(getattr(MyCharacter, attr))))
-
+    show(MyCharacter)
 
 def saveme():
-    file = open("MyTT-Character", "wb")
-    pickle.dump(MyCharacter, file)
-    file.close()
-
+    savechar(MyCharacter)
+    
+#def loadme():
+#    MyCharacter = loadchar()
 
 def loadme():
     global MyCharacter
@@ -127,12 +109,10 @@ def loadme():
 
 
 def edit():
+    global MyCharacter
     for item in MyCharacter.__dict__:
         print((item, MyCharacter.__dict__[item]))
-        try:
-            change = str(input("Change? >>"))
-        except:
-            print("(y or n)")
+        change = str(input('Change? ("y" to change) >>'))
         if change.lower() == "y":
             newvalue = input("New value? >>")
             try:
@@ -140,13 +120,14 @@ def edit():
             except:
                 print("Bad value.  Not changed.")
                 pass
-#### fix integers
+#### strings to integers
     MyCharacter.st = int(MyCharacter.st)
     MyCharacter.dx = int(MyCharacter.dx)
     MyCharacter.iq = int(MyCharacter.iq)
     MyCharacter.lk = int(MyCharacter.lk)
     MyCharacter.co = int(MyCharacter.co)
     MyCharacter.ch = int(MyCharacter.ch)
+    MyCharacter.AP = int(MyCharacter.AP)
     MyCharacter.wdice = int(MyCharacter.wdice)
     MyCharacter.wadds = int(MyCharacter.wadds)
     MyCharacter.armortakes = int(MyCharacter.armortakes)
