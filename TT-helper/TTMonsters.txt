@@ -1,0 +1,3 @@
+A huge Rock Troll,50
+A small Rock Troll,25
+Vampire,50
