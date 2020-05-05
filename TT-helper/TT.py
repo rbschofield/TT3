@@ -17,12 +17,24 @@ MyCharacter = Hero(12,12,12,12,12,12)
 
 global dungeonarray
 dungeonarray = []
-file = open( "TTDungeon.txt", "r" )
+file = open("TTDungeon.txt","r")
 for line in file:
     if line.startswith("#"):
         pass
     else:
         dungeonarray.append(line)
+file.close()
+
+# Load monster list:
+
+global MonsterList
+MonsterList = []
+file = open("TTMonsters.txt","r")
+for line in file:
+    if line.startswith("#"):
+        pass
+    else:
+        MonsterList.append(line.split(","))
 file.close()
 
 ##### Initialization Complete #####
@@ -220,11 +232,11 @@ def monster():
     global Monster
     global mr
 
-    MonsterList = [["Orc",10], ["Skeleton",15], ["Goblin",20], ["Ghoul",28], ["Ogre",29], ["Vampire",30], ["Flame Demon",35], ["Dragon",50]]
+#    MonsterList = [["Orc",10], ["Skeleton",15], ["Goblin",20], ["Ghoul",28], ["Ogre",29], ["Vampire",30], ["Flame Demon",35], ["Dragon",50]]
     roll = int(random.random()*len(MonsterList))
 
     Monster = MonsterList[roll][0]
-    mr = MonsterList[roll][1]
+    mr = int(MonsterList[roll][1].strip())
 
     print(Monster)
     print(mr)

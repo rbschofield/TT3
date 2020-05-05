@@ -1,3 +1,22 @@
-A huge Rock Troll,50
-A small Rock Troll,25
-Vampire,50
+##### Original List #####
+Orc,10
+Skeleton,15
+Goblin,20
+Ghoul,28
+Ogre,29
+Vampire,30
+Flame Demon,35
+Dragon,50
+##### New Additions #####
+Small Rock Troll,25
+Large Rock Troll,50
+Huge Rock Troll,75
+Large Dragon,75
+Huge Dragon,100
+Pixie,8
+Fire Ants,15
+Bugbear,22
+Gremlin,18
+Sprite,16
+Zombie,15
+Zombies,28
