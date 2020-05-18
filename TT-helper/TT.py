@@ -2,6 +2,7 @@ __author__ = 'Robert Schofield'
 
 #import random, pickle
 import random
+from SavingRoll import *
 from GameDice import *
 from TTClasses import *
 from TTChars import *
@@ -291,10 +292,11 @@ def combat():
 
 
 def test():
-    print_slow ("\nTest Function:")
+    save(MyCharacter)
+#    print_slow ("\nTest Function:")
 
-    for item in vars(MyCharacter):
-        print((item, getattr(MyCharacter, item)))
+#    for item in vars(MyCharacter):
+#        print((item, getattr(MyCharacter, item)))
 
 #    for item in MyCharacter.__dict__:
 #        print(item,":",MyCharacter.__dict__[item])
