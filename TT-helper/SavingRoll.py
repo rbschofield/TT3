@@ -1,8 +1,13 @@
+__author__ = 'Robert Schofield'
+
 from TTClasses import *
 from TTChars import *
 import random
 
 Character = Hero(12,13,14,15,16,17)
+
+############################################
+# for interactive saves- displayed to player
 
 def save(char = Character):
     show(char)
@@ -38,6 +43,23 @@ def save(char = Character):
     else:
         print("You failed the Save.")
 
+
+########### Saving roll ###########
+# for internal, non-displayed saves
+
+def save_roll(level, attribute):
+    target = (5*level)+15
+    r1 = 0; r2 = 0; total = 0
+    while r1 == r2:
+        r1 = random.randint(1,6)
+        r2 = random.randint(1,6)
+        total = total+(r1+r2)
+    roll = total + attribute
+#    print((total, attribute, roll))
+    if roll >= target:
+        return True
+    else:
+        return False
 
 
 

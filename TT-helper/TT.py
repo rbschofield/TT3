@@ -263,6 +263,9 @@ def dungeon():
         else:
             print((piece), end=' ')
 
+def saveroll():
+    save(MyCharacter)
+
 def combat():
     global mr
     global MyCharacter
@@ -292,8 +295,8 @@ def combat():
 
 
 def test():
-    save(MyCharacter)
-#    print_slow ("\nTest Function:")
+#    save(MyCharacter)
+    print_slow ("\nTest Function:")
 
 #    for item in vars(MyCharacter):
 #        print((item, getattr(MyCharacter, item)))
@@ -304,7 +307,7 @@ def test():
 ##### End Main Functions #####
 ##### Main Menu #####
 
-MenuDict = {"1":"charmenu", "2":"monster", "3":"dungeon", "4":"treasure", "5":"combat", "9":"test", "x":"done"}
+MenuDict = {"1":"charmenu", "2":"monster", "3":"dungeon", "4":"treasure", "5":"saveroll", "6":"combat", "9":"test", "x":"done"}
 
 def Menu():
     print()
@@ -313,7 +316,8 @@ def Menu():
     print ("2) Random Monster")
     print ("3) Dungeon Element")
     print ("4) Random Treasure")
-    print ("5) Combat! [current Character vs Monster]")
+    print ("5) Attempt Saving Roll")
+    print ("6) Combat! [current Character vs Monster]")
     print()
     print ("9-test")
     print ("x) EXIT")

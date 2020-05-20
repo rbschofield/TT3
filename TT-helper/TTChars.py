@@ -1,4 +1,4 @@
-h_author__ = 'Robert Schofield'
+__author__ = 'Robert Schofield'
 
 import pickle
 from GameDice import *
@@ -29,3 +29,11 @@ def show(Character):
 #    return pickle.load(file)
 #    print(MyCharacter)
 #    file.close()
+
+def takedamage(Character, damage):
+    Character.co = Character.co - damage
+    print(Character.name+" took "+str(damage)+" damage!")
+
+def healdamage(Character, heal):
+    Character.co = Character.co + heal
+    print(Character.name+" healed "+str(heal))
