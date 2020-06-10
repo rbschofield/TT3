@@ -38,6 +38,18 @@ for line in file:
         MonsterList.append(line.split(","))
 file.close()
 
+# Load treasure list:
+
+global TreasureList
+TreasureList = []
+file = open("TTTreasure.txt","r")
+for line in file:
+    if line.startswith("#"):
+        pass
+    else:
+        TreasureList.append(line.split(","))
+file.close()
+
 ##### Initialization Complete #####
 banner = open("banner.ascii","r")
 
@@ -45,7 +57,7 @@ for line in banner:
     print(line, end='')
 banner.close()
 print()
-print_slow("Game Master Helper, or Solo Play................. GO!")
+print_slow("Game Master Helper, or Solo Play......... GO!")
 
 ##### Character Functions #####
 
@@ -243,12 +255,22 @@ def monster():
     print(mr)
 
 def treasure():
-    TreasureDict = {1:["Gem",15], 2:["Jewels",25], 3:["Gold",40], 4:["Amulet",75]}
-    roll = d4()
-    print(("Treasure: " + TreasureDict[roll][0]))
-    print(("Value: " + str(TreasureDict[roll][1])))
-    print(("\nYou get " + str(TreasureDict[roll][1]) + " Adventure Points!"))
-    MyCharacter.AP = MyCharacter.AP + TreasureDict[roll][1]
+    global Treasure
+    global gp_value
+    roll = int(random.random()*len(TreasureList))
+    Treasure = TreasureList[roll][0]
+    gp_value = int(TreasureList[roll][1].strip())
+    print("Treasure: " + Treasure)
+    print("Value: " + str(gp_value))
+    print("\nYou get " + str(gp_value) + " Adventure Points!")
+    MyCharacter.AP = MyCharacter.AP + gp_value
+
+#    TreasureDict = {1:["Gem",15], 2:["Jewels",25], 3:["Gold",40], 4:["Amulet",75]}
+#    roll = d4()
+#    print(("Treasure: " + TreasureDict[roll][0]))
+#    print(("Value: " + str(TreasureDict[roll][1])))
+#    print(("\nYou get " + str(TreasureDict[roll][1]) + " Adventure Points!"))
+#    MyCharacter.AP = MyCharacter.AP + TreasureDict[roll][1]
 
 def dungeon():
 #    print dungeonarray
