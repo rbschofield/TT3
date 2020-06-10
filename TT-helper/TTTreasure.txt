@@ -1,0 +1,23 @@
+##### Treasure List ########
+##### treasure, gp value ###
+Small Saphire,10
+Small Ruby,10
+Small Diamond,20
+Small Bag of Jewels,40
+Medium Bag of Jewels,80
+Medium Bag of Jewels,100
+Jeweled Goblet,80
+Jeweled Necklace,100
+Medium Diamon,80
+##### Extra Good! #####
+Jeweled Ring (Non-Magic),250
+Large Bag of Gems,200
+Sack of Gold,100
+Large Sack of Gold,400
+Huge Pile of Gold!,600
+Huge Saphire,400
+Huge Ruby,450
+Huge Diamond!,700
+Large Bag of Jewels,500
+Huge Bag of Jewels!,800
+Jeweled Crown!,1000
