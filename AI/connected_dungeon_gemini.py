@@ -5,6 +5,8 @@ from langchain.prompts import PromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableSequence
 
+import os
+os.environ["GOOGLE_API_KEY"] = "(key)"
 
 # ----------------------------
 # RANDOM ELEMENT HELPERS
@@ -73,7 +75,7 @@ def build_dungeon_chain():
     )
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-pro",
+        model="gemini-2.5-flash",
         temperature=0.9
     )
 
